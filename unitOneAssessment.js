@@ -5,31 +5,109 @@ let assert = require('assert')
 // Write a function called isOdd that returns whether or not a number is odd.
 // If something that is not a number is passed in, return false.
 
+const isOdd = (num => {
+
+if (!isNaN(num)) {
+  if (num % 2 !== 0) {
+    return true
+  } else {
+    return false
+  }
+} else {
+  return false
+}
+})
 
 // Uncomment out the next line to test your solution
-// runQ1Tests()
+runQ1Tests()
 
 
 // Question Two:
 
 // Write a function called numberOfDigits that returns how many digits are in a given number
 
+// My work
+// let num = 123;
+// let arrayNum = num.toString();
+//
+// console.log(arrayNum.length);
+
+const numberOfDigits = (el => {
+  let numDigits = el.toString();
+    return numDigits.length;
+})
+
 // Uncomment out the next line to test your solution
-// runQ2Tests()
+runQ2Tests()
 
 // Question Three:
 
 // Write a function called disemvowel that removes all of the vowels from a string.
 // Treat y as a consonant, not a vowel
 
+let word = 'Pizza';
+
+// console.log(word.split(''))
+
+// My Work
+// let splitWord = word.split('');
+// let vowels = 'aeiouAEIOU';
+// let finishedWord = [];
+//
+// for (let i = 0; i < splitWord.length; i++) {
+//   if (!vowels.includes(splitWord[i])) {
+//       finishedWord.push(splitWord[i]);
+//   }
+// }
+// console.log(finishedWord);
+
+const disemvowel = (word => {
+  let splitWord = word.split('');
+  let vowels = 'aeiouAEIOU';
+  let finishedWord = [];
+
+  for (let i = 0; i < splitWord.length; i++) {
+    if (!vowels.includes(splitWord[i])) {
+        finishedWord.push(splitWord[i]);
+    }
+  }
+
+  return finishedWord.join('');
+})
+
 // Uncomment out the next line to test your solution
-// runQ3Tests()
+runQ3Tests()
 
 // Question Four:
 // Write a function called secondSmallest that returns the second smallest number in an array
 
+// My work
+// let array = [1,10,7,90,5,4];
+// //since this array doesnt work with my older answer below im resorting to SORT
+// let arraySorted = array.sort(function (a, b) {return a - b});
+//
+// let smallest = array[0];
+// let secondSmallestNum = array[1];
+//
+// for (let i = array.length; i > 0; i--) {
+//
+//   if (array[i] < smallest) {
+//     secondSmallestNum = smallest;
+//     smallest = array[i];
+//   }
+// }
+// console.log(secondSmallestNum);
+// console.log(arraySorted);
+
+
+const secondSmallest = (array => {
+  let arraySorted = array.sort(function (a, b) {return a - b});
+
+  return arraySorted[1];
+})
+
 // Uncomment out the next line to test your solution
-// runQ4Tests()
+runQ4Tests()
 
 // Question Five:
 // Write a function called getLocations that takes in an array of objects that look like the array below,
@@ -37,13 +115,32 @@ let assert = require('assert')
 // The output should be in the same order as the input
 
 // Sample input:
-// [{location: "Algeria", population: 41}, {location: "Belize", population: 0.4}, {location: "China", population: 1386}, {location: "Denmark", population: 6}]
+// let array = [{location: "Algeria", population: 41}, {location: "Belize", population: 0.4}, {location: "China", population: 1386}, {location: "Denmark", population: 6}]
 
 // Sample output:
 // ["Algeria", "Belize", "China", "Denmark"]
 
+// console.log(object[0].location)
+
+// let newObject = [];
+//
+//   for (let value of array) {
+//     newObject.push(value.location);
+//     // newObject[`${key}`] += object[key];
+//   }
+//   console.log(newObject);
+
+const getLocations = (array => {
+  let newObject = [];
+
+    for (let value of array) {
+      newObject.push(value.location);
+    }
+    return newObject;
+})
+
 // Uncomment out the next line to test your solution
-// runQ5Tests()
+runQ5Tests()
 
 
 // Question Six:
@@ -51,8 +148,21 @@ let assert = require('assert')
 // Write a function called onlyOddStrings that takes in an array of strings as input and returns an array that only includes strings with an odd number of characters
 // Your function should use a higher-ordered function (e.g map, filter, reduce, every, sort) in its implementation
 
+const onlyOddStrings = (arrayOfStrings => {
+
+  let finishedArray = [];
+
+  for (let i = 0; i < arrayOfStrings.length; i++){
+      if (arrayOfStrings[i].length % 2 !== 0) {
+          finishedArray.push(arrayOfStrings[i]);
+      }
+  }
+
+  return finishedArray;
+})
+
 // Uncomment out the next line to test your solution
-// runQ6Tests()
+runQ6Tests()
 
 
 // Question Seven:
@@ -66,12 +176,55 @@ let assert = require('assert')
 // let myDay = Day(80, "sunny")
 // myDay.getDescription() // returns "It is 80 degrees and sunny"
 
+class Day {
+  constructor(temperature, weather){
+    this.temperature = temperature,
+    this.weather = weather
+  }
+
+  getDescription(){
+    return `It is ${this.temperature} degrees and ${this.weather}`
+  }
+}
+
+// let myDay = new Day(80, 'Sunny');
+// console.log(myDay.getDescription() + '\n');
+
+// Was checking if I still remembered how to create a class. Still got it!
+// let monday = new Day(78, 'hot')
+// console.log(monday);
+
 //b.
 // Make a function called getAllDayDescriptions that takes in an array of Day objects and returns an array of their descriptions.  Use a higher-ordered function (e.g map, filter, reduce, every, sort) in your implementation.
 // The output should be in the same order as the input
 
+// let myArr = [
+//   new Day(50, "raining"),
+//   new Day(99, "sunny"),
+//   new Day(24, "snowing")
+// ]
+// [
+//   "It is 50 degrees and raining",
+//   "It is 99 degrees and sunny",
+//   "It is 24 degrees and snowing",
+// ]
+
+function getAllDayDescriptions (array) {
+  let arrayOfDescriptions = [];
+
+  array.forEach(el => {
+    arrayOfDescriptions.push(el.getDescription());
+    // console.log(arrayOfDescriptions);
+    // return arrayOfDescriptions;
+  });
+  return arrayOfDescriptions;
+}
+
+//I knew forEach didn't use returns but I also knew I had to use a return for the test to run. Trial and error got me the answer >.<!
+// getAllDayDescriptions(myArr);
+
 // Uncomment out the next line to test your solution
-// runQ7Tests()
+runQ7Tests()
 
 
 
